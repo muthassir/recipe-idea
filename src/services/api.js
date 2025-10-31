@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const BASE = "https://www.themealdb.com/api/json/v1/1";
 
 export async function searchMeals({ query, filterType, filterValue } = {}) {
@@ -7,12 +9,10 @@ export async function searchMeals({ query, filterType, filterValue } = {}) {
   } else if (filterType && filterValue) {
     url = `${BASE}/filter.php?${filterType}=${encodeURIComponent(filterValue)}`;
   } else {
-    url = `${BASE}/search.php?s=chicken`; // default
+    url = `${BASE}/search.php?s=chicken`;
   }
 
-  const res = await fetch(url);
-  if (!res.ok) throw new Error("API Error");
-  const data = await res.json();
+  const { data } = await axios.get(url);
   const meals = data.meals || [];
 
   return meals.map((m) => ({
@@ -23,10 +23,10 @@ export async function searchMeals({ query, filterType, filterValue } = {}) {
 }
 
 export async function fetchMealById(id) {
-  const res = await fetch(`${BASE}/lookup.php?i=${id}`);
-  const data = await res.json();
+  const { data } = await axios.get(`${BASE}/lookup.php?i=${id}`);
   const meal = (data.meals && data.meals[0]) || null;
   if (!meal) throw new Error("Meal not found");
+
   return {
     id: meal.idMeal,
     title: meal.strMeal,
@@ -39,14 +39,16 @@ export async function fetchMealById(id) {
 
 export async function getFilters() {
   const [cats, areas, ingredients] = await Promise.all([
-    fetch(`${BASE}/list.php?c=list`).then((r) => r.json()),
-    fetch(`${BASE}/list.php?a=list`).then((r) => r.json()),
-    fetch(`${BASE}/list.php?i=list`).then((r) => r.json()),
+    axios.get(`${BASE}/list.php?c=list`),
+    axios.get(`${BASE}/list.php?a=list`),
+    axios.get(`${BASE}/list.php?i=list`),
   ]);
+
   return {
-    categories: cats.meals?.map((c) => c.strCategory) || [],
-    areas: areas.meals?.map((a) => a.strArea) || [],
-    ingredients: ingredients.meals?.slice(0, 50).map((i) => i.strIngredient) || [],
+    categories: cats.data.meals?.map((c) => c.strCategory) || [],
+    areas: areas.data.meals?.map((a) => a.strArea) || [],
+    ingredients:
+      ingredients.data.meals?.slice(0, 50).map((i) => i.strIngredient) || [],
   };
 }
 

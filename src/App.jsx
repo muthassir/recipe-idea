@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { searchMeals, fetchMealById, getFilters } from "./services/api";
 import RecipeCard from "./components/RecipeCard";
 import RecipeModal from "./components/RecipeModal";
@@ -14,8 +14,7 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const [filters, setFilters] = useState({ categories: [], areas: [], ingredients: [] });
   const [selectedFilter, setSelectedFilter] = useState({ type: "", value: "" });
-  const [tab, setTab] = useState("all"); // "all" or "favorites"
-
+  const [tab, setTab] = useState("all"); 
   useEffect(() => {
     getFilters().then(setFilters);
   }, []);
@@ -59,21 +58,21 @@ export default function App() {
 
   return (
     <div className="p-6 max-w-6xl mx-auto min-h-screen">
-      <h1 className="text-3xl font-bold text-center mb-6">🍳 Recipe Ideas</h1>
+      <h1 className="text-3xl font-bold text-center mb-6 text-white">Recipe Ideas</h1>
 
       {/* Tabs */}
       <div className="flex justify-center mb-6">
         <div role="tablist" className="tabs tabs-boxed">
           <button
             role="tab"
-            className={`tab ${tab === "all" ? "tab-active" : ""}`}
+            className={`tab ${tab === "all" ? "tab-active" : ""} text-white`}
             onClick={() => setTab("all")}
           >
             All Recipes
           </button>
           <button
             role="tab"
-            className={`tab ${tab === "favorites" ? "tab-active" : ""}`}
+            className={`tab ${tab === "favorites" ? "tab-active" : ""} text-error`}
             onClick={() => setTab("favorites")}
           >
             Favorites ({favList.length})
@@ -89,10 +88,10 @@ export default function App() {
             placeholder="Search recipes..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="input input-primary w-full sm:flex-1"
+            className="input input-neutral w-full sm:flex-1"
           />
           <select
-            className="select select-bordered select-neutral"
+            className="select select-bordered select-neutral lg:w-48 md:w-48 w-full "
             value={
               selectedFilter.type && selectedFilter.value
                 ? `${selectedFilter.type}:${selectedFilter.value}`
@@ -126,7 +125,7 @@ export default function App() {
       {/* Global Loading Spinner */}
       {loading && (
         <div className="flex justify-center items-center mt-12">
-          <span className="loading loading-spinner loading-lg text-primary"></span>
+          <span className="loading loading-spinner loading-lg text-error"></span>
         </div>
       )}
 
