@@ -1,16 +1,38 @@
-# React + Vite
+# 🍽️ Recipe Ideas App (React + TheMealDB)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern recipe search and discovery app built using **React**, **Tailwind CSS**, and **TheMealDB API**.  
+Users can search meals by name or filter by **Category**, **Area (Cuisine)**, and **Main Ingredient** — all fetched dynamically from the API.  
+It’s lightweight, fast, and requires **no backend server or API key**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
 
-## React Compiler
+- 🔍 Search recipes by name (e.g., “chicken”, “pasta”, “rice”)
+- 🧭 Filter meals by:
+  - **Category** (Seafood, Dessert, etc.)
+  - **Area / Cuisine** (Indian, Italian, Mexican, etc.)
+  - **Main Ingredient** (Chicken, Beef, etc.)
+- 📄 Paginated results for easy browsing
+- 🍴 Detailed recipe modal with:
+  - Instructions
+  - Image
+  - YouTube tutorial (if available)
+  - Source link
+  - Ingredient list with measures
+- ❤️ Save / unsave favorites (optional)
+- 💅 Styled with **Tailwind CSS** and **DaisyUI**
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🧩 Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+| Layer | Technology |
+|-------|-------------|
+| Frontend | React + Vite |
+| UI Library | Tailwind CSS + DaisyUI |
+| API | [TheMealDB](https://www.themealdb.com/api.php) |
+| Deployment |  Netlify |
+https://recipe-ideas-muthassir.netlify.app/
+
+---
